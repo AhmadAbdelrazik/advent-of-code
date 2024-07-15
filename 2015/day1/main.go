@@ -11,7 +11,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	ln := NotQuietLisp(string(buf))
+	ln := NotQuietLisp2(string(buf))
 	fmt.Println(ln)
 }
 
@@ -26,4 +26,19 @@ func NotQuietLisp(s string) int {
 		}
 	}
 	return counter
+}
+
+func NotQuietLisp2(s string) int {
+	counter := 0
+	for i, ch := range s {
+		if ch == '(' {
+			counter++
+		} else {
+			counter--
+		}
+		if counter == -1 {
+			return i + 1
+		}
+	}
+	return -1
 }
