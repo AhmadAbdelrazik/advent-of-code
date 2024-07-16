@@ -29,6 +29,31 @@ func TestVisitedHouses(t *testing.T) {
 		}
 
 	})
+
+	t.Run("Part2", func(t *testing.T) {
+		tests := []string{
+			"^v",
+			"^>v<",
+			"^v^v^v^v^v",
+		}
+
+		results := []int{
+			3,
+			3,
+			11,
+		}
+
+		for i, test := range tests {
+			t.Run(fmt.Sprintf("test:%q", test), func(t *testing.T) {
+				got := VisitedHouses2(test)
+				want := results[i]
+	
+				assertEquality(t, got, want)
+			})
+		}
+
+
+	})
 }
 
 func assertEquality(t testing.TB, got, want int) {

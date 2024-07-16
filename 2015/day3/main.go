@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-type point struct {
+type Point struct {
 	X int
 	Y int
 }
@@ -16,15 +16,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ans := VisitedHouses(string(buf))
+	ans := VisitedHouses2(string(buf))
 	fmt.Println(ans)
 }
 
 func VisitedHouses(s string) int {
-	
-	p := point{X: 0, Y: 0}
-	grid := make(map[point]int)
-	
+
+	p := Point{X: 0, Y: 0}
+	grid := make(map[Point]int)
+
 	grid[p]++
 	for _, ch := range s {
 		if ch == '^' {
@@ -40,4 +40,39 @@ func VisitedHouses(s string) int {
 	}
 
 	return len(grid)
-} 
+}
+
+func VisitedHouses2(s string) int {
+	santa := Point{X: 0, Y: 0}
+	robo := Point{X: 0, Y: 0}
+	grid := make(map[Point]int)
+
+	grid[santa]++
+	grid[robo]++
+
+	for i, ch := range s {
+		var pp *Point
+
+		if i%2 == 0 {
+			pp = &santa
+		} else {
+			pp = &robo
+		}
+
+		func(p *Point) {
+
+			if ch == '^' {
+				p.Y++
+			} else if ch == 'v' {
+				p.Y--
+			} else if ch == '>' {
+				p.X++
+			} else if ch == '<' {
+				p.X--
+			}
+			grid[*p]++
+		}(pp)
+	}
+
+	return len(grid)
+}
