@@ -66,7 +66,6 @@ func Part1(input, target string) int {
 	}	
 
 	return int(feedBackward(equation, target))
-	return 0
 }
 
 func feedBackward(equation map[string]string, target string) uint16 {
