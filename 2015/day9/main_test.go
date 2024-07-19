@@ -12,6 +12,15 @@ Dublin to Belfast = 141`
 
 		assertEquality(t, got, want)
 	})
+	t.Run("Part2", func(t *testing.T) {
+		given := `London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141`
+		got := Part2(given)
+		want := 982
+
+		assertEquality(t, got, want)
+	})
 }
 
 func assertEquality(t testing.TB, got, want int) {
