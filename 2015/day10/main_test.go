@@ -24,8 +24,8 @@ func TestElves(t *testing.T) {
 
 		for i := range tests {
 			t.Run(fmt.Sprintf("test_%v",tests[i]), func(t *testing.T) {
-				got,_ := Part1(tests[i])
-				if got != want[i] {
+				got := Part1(tests[i], 1)
+				if got != len(want[i]) {
 					t.Fatalf("got '%v' want '%v'", got, want[i])
 				}
 			})

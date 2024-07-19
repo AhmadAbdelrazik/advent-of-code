@@ -2,37 +2,36 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
 	input := "1321131112"
-	
-	var length int 
-	for i := 0; i < 40; i++ {
-		input, length = Part1(input)
-		fmt.Println("iteration number ", i + 1)
-	}
-	fmt.Println(length)
+
+	fmt.Println(Part1(input, 50))
 }
 
-func Part1(in string) (string, int) {
-
-	freq := make(map[byte]int)
+func Part1(in string, iterations int) int {
 
 	out := ""
-
-	for i := 0; i < len(in); i++ {
-		freq[in[i]]++
-		if i == len(in)-1 {
-			out += fmt.Sprint(freq[in[i]])
-			out += fmt.Sprintf("%v", in[i]-48)
-			freq[in[i]] = 0
-		} else if in[i] != in[i+1] {
-			out += fmt.Sprint(freq[in[i]])
-			out += fmt.Sprintf("%d", in[i]-48)
-			freq[in[i]] = 0
+	start := time.Now()
+	for j := 0; j < iterations; j++ {
+		iterationStart := time.Now()
+		out = ""
+		count := 0
+		for i := 0; i < len(in); i++ {
+			count++
+			if i == len(in)-1 || in[i] != in[i+1] {
+				out += fmt.Sprint(count)
+				out += fmt.Sprintf("%v", in[i]-48)
+				count = 0
+			}
 		}
+		fmt.Println("iteration number ", j+1)
+		in = out
+		fmt.Println("Length = ", len(out))
+		fmt.Println("Time passed", time.Since(iterationStart))
 	}
-
-	return out, len(out)
+	fmt.Println("Total time = ", time.Since(start))
+	return len(out)
 }
