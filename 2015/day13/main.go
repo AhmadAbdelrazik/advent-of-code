@@ -13,8 +13,10 @@ type Graph map[string]map[string]int
 func main() {
 	inputRaw, _ := os.ReadFile("2015/day13/input.txt")
 	input := string(inputRaw)
-	val := Part1(makeGraph(input))
-	fmt.Printf("val: %v\n", val)
+	part1 := Part1(makeGraph(input))
+	part2 := Part2(makeGraph(input))
+	fmt.Printf("part1: %v\n", part1)
+	fmt.Printf("part2: %v\n", part2)
 }
 
 func makeGraph(input string) Graph {
@@ -46,6 +48,21 @@ func makeGraph(input string) Graph {
 
 func Part1(graph Graph) int {
 	checked := make(map[string]bool)
+	for f := range graph {
+		return Recursion(graph, checked, f, f)
+	}
+	return 0
+}
+
+func Part2(graph Graph) int {
+	checked := make(map[string]bool)
+
+	graph["you"] = make(map[string]int)
+	for f := range graph {
+		graph["you"][f] = 0
+		graph[f]["you"] = 0
+	}
+
 	for f := range graph {
 		return Recursion(graph, checked, f, f)
 	}
